@@ -1,0 +1,64 @@
+##### 5 Types of loop
+
+# for i in something
+for i in $(seq 1 10)
+    do echo $i
+done
+
+
+# while do done
+read answer
+while [ $answer != "joe" ]
+do
+	echo "Please try again"
+	read answer
+done
+
+
+# until do done
+selection=
+until [ "$selection" = "0" ]; do
+	echo "Program menu."
+	echo "1. Display free disk space"
+	echo "2. Display Free Memory"
+	echo "0. Exit Program"
+	read -p "Enter Selection: " selection
+	case $selection in
+		1) df ;;
+		2) free ;;
+		0) exit ;;
+		*) echo "Please enter 1, 2, or 0";;
+	esac
+done
+
+
+# select in do done
+PS3="Please enter your choice: "
+select var in "Hard Disk Space" "Free Memory" "exit"
+do
+	case $REPLY in
+		1) echo "Option 1 selected" ;;
+		2) echo "Option 2 selected" ;;
+		3) break;;
+		*) echo "Please choose 1,2, or 3" ;;
+	esac
+done
+
+
+# recursive function
+i=0
+function recursiveFn() {
+    if (( i < 10 ))
+	then
+		i=$((i+1))
+		echo $i
+		recursiveFn
+	else
+		echo Done
+		exit
+	fi
+}
+recursiveFn
+
+
+
